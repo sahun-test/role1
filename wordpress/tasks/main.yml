@@ -1,0 +1,18 @@
+---
+- name: download and copy wordpress folder
+  script: script.sh
+- name: add wp-config
+  replace:
+     path: /var/www/html/wordpress/wp-config.php
+     regexp: 'database_name_here'
+     replace: 'wordpress'
+- name: add wp-config1
+  replace:
+     path: /var/www/html/wordpress/wp-config.php
+     regexp: 'username_here'
+     replace: 'wordpress'
+- name: add wp-config2
+  replace:
+     path: /var/www/html/wordpress/wp-config.php
+     regexp: 'password_here'
+     replace: '12345'  

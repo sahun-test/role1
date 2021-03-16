@@ -1,0 +1,27 @@
+---
+- name: apt-get update for mysql
+  apt:
+          update_cache: yes
+- name: installation of mysql-server
+  apt:
+          name: mysql-server
+          state: present
+- name: Create a new database with name 'wordpress'
+  become: yes
+  #command: echo "create database `wordpress`" | mysql -u root
+  mysql_db:
+          login_user: root
+          login_password: "root"
+          login_unix_socket: /var/run/mysqld/mysqld.sock
+          name: wordpress
+          state: present
+- name: Create database user with name 'wordpress' and password '12345' with all database privileges
+  mysql_user:
+    login_user: root
+    login_password: "root"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    name: wordpress
+    password: 12345
+    priv: '*.*:ALL'
+    state: present
+# tasks file for mysql
